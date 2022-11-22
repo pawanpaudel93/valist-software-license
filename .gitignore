@@ -12,28 +12,16 @@ coverage
 coverage.json
 typechain
 
-# Hardhat files
-
-cache
-artifacts
-/packages/backend/node_modules
-/packages/backend/deployments/\*
-
-# Foundry files
-
-/packages/backend/cache
-/packages/backend/out
-
 # next.js
 
-/packages/frontend/node_modules
-packages/frontend/.next/
+/packages/token-gating-dapp/node_modules
+packages/token-gating-dapp/.next/
 /out/
 
 # vite
 
-/packages/frontend/node_modules
-/packages/frontend/dist
+/packages/token-gating-dapp/node_modules
+/packages/token-gating-dapp/dist
 
 # production
 
