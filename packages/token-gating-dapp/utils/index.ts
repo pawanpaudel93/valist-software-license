@@ -1,9 +1,19 @@
 import { serializeError } from "eth-rpc-errors";
+import { SerializedEthereumRpcError } from "eth-rpc-errors/dist/classes";
 import { BigNumber } from "ethers";
+
+type RPCError =
+  | SerializedEthereumRpcError & {
+      data: {
+        originalError?: {
+          reason?: string;
+        };
+      };
+    };
 
 export const parseError = (error: unknown, customMessage: string) => {
   const fallbackError = { code: 4999, message: customMessage };
-  const serializedError = serializeError(error, { fallbackError });
+  const serializedError = serializeError(error, { fallbackError }) as RPCError;
   return (
     serializedError?.data?.originalError?.reason ?? serializedError.message
   );
