@@ -7,14 +7,15 @@ const erc20ABI = [
 ];
 
 export default class LicenseClient {
-  constructor(private license: Contract) {}
+  constructor(public license: Contract) {}
 
   async purchaseProduct(
     projectID: BigNumberish,
     recipient: string
   ): Promise<ContractTransaction> {
     const price = await this.getProductPrice(projectID);
-    return await this.license.purchase(projectID, recipient, { value: price });
+    const purchase = this.license['purchase(uint256,address)'];
+    return await purchase(projectID, recipient, { value: price });
   }
 
   async purchaseProductToken(
@@ -28,25 +29,19 @@ export default class LicenseClient {
     const approveTx = await erc20.approve(this.license.address, price);
     await approveTx.wait();
     // purchase the product
-    return await this.license.purchase(token, projectID, recipient);
+    const purchase = this.license['purchase(address,uint256,address)'];
+    return await purchase(token, projectID, recipient);
   }
 
   async checkLicense(
     projectID: BigNumberish,
     signingMessage = 'Authenticate your wallet'
   ) {
-    const signer = this.license.signer;
-    if (!signer) {
-      throw Error('Signer is not present');
-    }
-    const signedMessage = await signer.signMessage(signingMessage);
+    const signedMessage = await this.license.signer.signMessage(signingMessage);
     const digest = arrayify(hashMessage(signingMessage));
     const recoveredAddress = recoverAddress(digest, signedMessage);
-    return await this.getProductBalance(recoveredAddress, projectID);
-  }
-
-  async getProductPrice(projectID: BigNumberish): Promise<BigNumber> {
-    return await this.license.getPrice(projectID);
+    const balance = await this.getProductBalance(recoveredAddress, projectID);
+    return balance.gt(0);
   }
 
   async getProductBalance(
@@ -56,10 +51,16 @@ export default class LicenseClient {
     return await this.license.balanceOf(address, projectID);
   }
 
+  async getProductPrice(projectID: BigNumberish): Promise<BigNumber> {
+    const getPrice = this.license['getPrice(uint256)'];
+    return await getPrice(projectID);
+  }
+
   async getProductTokenPrice(
     token: string,
     projectID: BigNumberish
   ): Promise<BigNumber> {
-    return await this.license.getPrice(token, projectID);
+    const getPrice = this.license['getPrice(address,uint256)'];
+    return await getPrice(token, projectID);
   }
 }

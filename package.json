@@ -8,7 +8,8 @@
     "dev": "yarn workspace token-gating-dapp dev",
     "build": "yarn workspace token-gating-dapp build",
     "start": "yarn workspace token-gating-dapp start",
-    "lint": "yarn workspace token-gating-dapp lint"
+    "lint": "yarn workspace token-gating-dapp lint",
+    "build-sdk": "yarn workspace valist-software-license build"
   },
   "workspaces": {
     "packages": [

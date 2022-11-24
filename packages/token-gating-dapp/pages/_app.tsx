@@ -1,50 +1,36 @@
-import * as React from 'react';
-import type { AppProps } from 'next/app';
-import NextHead from 'next/head';
-import '../styles/globals.css';
+import * as React from "react";
+import type { AppProps } from "next/app";
+import NextHead from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from "@chakra-ui/react";
 
 // Imports
-import { chain, createClient, WagmiConfig, configureChains } from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import { chain, createClient, WagmiConfig, configureChains } from "wagmi";
+import { SessionProvider } from "next-auth/react";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 
-import '@rainbow-me/rainbowkit/styles.css';
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  Chain,
-} from '@rainbow-me/rainbowkit';
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
-import { useIsMounted } from '../hooks';
+import { useIsMounted } from "../hooks";
+import NavBar from "@/components/Navigation/NavBar";
+import { Footer } from "@/components/Navigation/Footer";
 
 // Get environment variables
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_ID as string;
 // const infuraId = process.env.NEXT_PUBLIC_INFURA_ID as string;
 
-const hardhatChain: Chain = {
-  id: 31337,
-  name: 'Hardhat',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'Hardhat',
-    symbol: 'HARD',
-  },
-  network: 'hardhat',
-  rpcUrls: {
-    default: 'http://127.0.0.1:8545',
-  },
-  testnet: true,
-};
-
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, hardhatChain],
-  [alchemyProvider({ alchemyId }), publicProvider()]
+  [chain.polygonMumbai],
+  [alchemyProvider({ apiKey: alchemyId }), publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'token-gating-dapp',
+  appName: "token-gating-dapp",
   chains,
 });
 
@@ -60,14 +46,34 @@ const App = ({ Component, pageProps }: AppProps) => {
   if (!isMounted) return null;
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider coolMode chains={chains}>
-        <NextHead>
-          <title>token-gating-dappg</title>
-        </NextHead>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </RainbowKitProvider>
+      <SessionProvider refetchInterval={0} session={pageProps.session}>
+        <RainbowKitProvider coolMode chains={chains}>
+          <NextHead>
+            <title>Token Gating Dapp</title>
+          </NextHead>
+          <ChakraProvider>
+            <NavBar />
+            <div
+              style={{ marginTop: "70px", minHeight: "calc(100vh - 140px)" }}
+            >
+              <Component {...pageProps} />
+            </div>
+            <Footer />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </ChakraProvider>
+        </RainbowKitProvider>
+      </SessionProvider>
     </WagmiConfig>
   );
 };

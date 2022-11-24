@@ -1,9 +1,9 @@
-import { getCsrfToken, signIn, useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import { SiweMessage } from "siwe";
-import { useAccount, useNetwork, useSignMessage } from "wagmi";
+import { useAccount, useNetwork, useSigner } from "wagmi";
 import Head from "next/head";
-import NextLink from "next/link";
+import { create, getLicenseAddress, Provider } from "valist-software-license";
+import { getShortAddress, PRODUCT_ID } from "@/utils";
 import {
   Box,
   Heading,
@@ -16,29 +16,19 @@ import {
 } from "@chakra-ui/react";
 import PurchaseLicense from "@/components/Valist/PurchaseLicense";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 
 function Home() {
-  const { signMessageAsync } = useSignMessage();
   const { chain } = useNetwork();
+  const { data: signer } = useSigner();
   const { address, isConnected } = useAccount();
-  const { data: session } = useSession();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
-
-  const getAddress = () => {
-    if (session) {
-      const connectedAddress = session.user?.name;
-      return `${connectedAddress?.slice(0, 6)}...${connectedAddress?.slice(
-        -4
-      )}`;
-    }
-    return "";
-  };
 
   const handleLogin = async () => {
     try {
       setIsLoading(true);
-      const callbackUrl = "/protected";
       const message = new SiweMessage({
         domain: window.location.host,
         address: address,
@@ -46,18 +36,18 @@ function Home() {
         uri: window.location.origin,
         version: "1",
         chainId: chain?.id,
-        nonce: await getCsrfToken(),
       });
-      const signature = await signMessageAsync({
-        message: message.prepareMessage(),
+
+      const client = await create(signer as unknown as Provider, {
+        chainId: chain?.id,
+        licenseAddress: getLicenseAddress(chain?.id!),
       });
-      const response = await signIn("credentials", {
-        message: JSON.stringify(message),
-        redirect: false,
-        signature,
-        callbackUrl,
-      });
-      if (response?.status === 401) {
+      const hasLicense = await client.checkLicense(
+        PRODUCT_ID,
+        message.prepareMessage()
+      );
+
+      if (!hasLicense) {
         toast({
           title: `Unauthorized`,
           description: "Software License NFT missing...",
@@ -66,6 +56,8 @@ function Home() {
           position: "top-right",
           isClosable: true,
         });
+      } else {
+        setIsAuthenticated(true);
       }
     } catch (error) {
       window.alert(error);
@@ -101,24 +93,18 @@ function Home() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Serve exclusive content to users who own the License NFT to the
-            website.
+            Serve exclusive content to users who own the License to the website.
             <br />
             You cannot access the protected pages unless purchase a Software
             License NFTs.
           </Text>
           <div>
             {isConnected ? (
-              session ? (
+              isAuthenticated ? (
                 <div>
                   <p>
-                    Welcome, <Text as="b">{getAddress()}</Text>
+                    Welcome, <Text as="b">{getShortAddress(address)}</Text>
                   </p>
-                  <NextLink passHref href={"/protected"}>
-                    <Button colorScheme="green" rounded={"full"} mr="2">
-                      View protected page
-                    </Button>
-                  </NextLink>
                   <Button
                     colorScheme="red"
                     isLoading={isLoading}
@@ -127,7 +113,7 @@ function Home() {
                     onClick={async (e) => {
                       e.preventDefault();
                       setIsLoading(true);
-                      await signOut();
+                      setIsAuthenticated(false);
                       setIsLoading(false);
                     }}
                   >
@@ -146,7 +132,7 @@ function Home() {
                     handleLogin();
                   }}
                 >
-                  Sign-in
+                  View Protected content
                 </Button>
               )
             ) : (
@@ -155,19 +141,22 @@ function Home() {
               </Center>
             )}
           </div>
-          <PurchaseLicense session={session} />
+          {isAuthenticated && (
+            <Box textAlign="center" px={6}>
+              <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
+              <Heading as="h2" size="xl" mt={6} mb={2}>
+                Protected Content
+              </Heading>
+              <Text color={"gray.500"}>
+                <strong>This is the protected content.</strong>
+              </Text>
+            </Box>
+          )}
+          <PurchaseLicense isAuthenticated={isAuthenticated} />
         </Stack>
       </Container>
     </>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
 }
 
 export default Home;
