@@ -4,6 +4,7 @@ import { getCsrfToken } from "next-auth/react";
 import { SiweMessage } from "siwe";
 import { create, getLicenseAddress } from "valist-software-license";
 import { ethers } from "ethers";
+import { PRODUCT_ID } from "@/utils";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -45,14 +46,8 @@ export default async function auth(req: any, res: any) {
               licenseAddress: getLicenseAddress(result.data.chainId),
             });
             const hasLicense = (
-              await client.getProductBalance(
-                siwe.address,
-                ethers.BigNumber.from(
-                  "0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc2e905"
-                )
-              )
+              await client.getProductBalance(siwe.address, PRODUCT_ID)
             ).gt(0);
-            console.log(hasLicense);
             if (hasLicense) {
               return {
                 id: siwe.address,
