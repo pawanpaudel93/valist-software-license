@@ -1,7 +1,7 @@
 import { getCsrfToken, signIn, useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import { SiweMessage } from "siwe";
-import { useAccount, useNetwork, useSignMessage } from "wagmi";
+import { useAccount, useNetwork, useSigner } from "wagmi";
 import Head from "next/head";
 import NextLink from "next/link";
 import {
@@ -14,14 +14,16 @@ import {
   Stack,
   Center,
 } from "@chakra-ui/react";
+import { create, getLicenseAddress, Provider } from "valist-software-license";
 import PurchaseLicense from "@/components/Valist/PurchaseLicense";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { parseError, PRODUCT_ID } from "@/utils";
 
 function Home() {
-  const { signMessageAsync } = useSignMessage();
   const { chain } = useNetwork();
   const { address, isConnected } = useAccount();
   const { data: session } = useSession();
+  const { data: signer } = useSigner();
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
@@ -48,9 +50,27 @@ function Home() {
         chainId: chain?.id,
         nonce: await getCsrfToken(),
       });
-      const signature = await signMessageAsync({
-        message: message.prepareMessage(),
+      const client = await create(signer as unknown as Provider, {
+        chainId: chain?.id,
+        licenseAddress: getLicenseAddress(chain?.id!),
       });
+      const { hasLicense, signature } = await client.checkLicense(
+        PRODUCT_ID,
+        message.prepareMessage()
+      );
+
+      if (!hasLicense) {
+        toast({
+          title: `Unauthorized`,
+          description: "Software License NFT missing...",
+          duration: 5000,
+          status: "error",
+          position: "top-right",
+          isClosable: true,
+        });
+        setIsLoading(false);
+        return;
+      }
       const response = await signIn("credentials", {
         message: JSON.stringify(message),
         redirect: false,
@@ -68,7 +88,13 @@ function Home() {
         });
       }
     } catch (error) {
-      window.alert(error);
+      toast({
+        title: parseError(error, "Error signing in..."),
+        duration: 5000,
+        status: "error",
+        position: "top-right",
+        isClosable: true,
+      });
     }
     setIsLoading(false);
   };

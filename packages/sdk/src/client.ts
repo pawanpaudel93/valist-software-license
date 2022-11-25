@@ -37,11 +37,11 @@ export default class LicenseClient {
     projectID: BigNumberish,
     signingMessage = 'Authenticate your wallet'
   ) {
-    const signedMessage = await this.license.signer.signMessage(signingMessage);
+    const signature = await this.license.signer.signMessage(signingMessage);
     const digest = arrayify(hashMessage(signingMessage));
-    const recoveredAddress = recoverAddress(digest, signedMessage);
+    const recoveredAddress = recoverAddress(digest, signature);
     const balance = await this.getProductBalance(recoveredAddress, projectID);
-    return balance.gt(0);
+    return { hasLicense: balance.gt(0), signature };
   }
 
   async getProductBalance(
