@@ -15,6 +15,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@rainbow-me/rainbowkit": "^0.7.4",
+    "awesome-dev-jokes": "^1.0.3",
     "eth-rpc-errors": "^4.0.3",
     "ethers": "^5.7.2",
     "framer-motion": "^6.4.3",

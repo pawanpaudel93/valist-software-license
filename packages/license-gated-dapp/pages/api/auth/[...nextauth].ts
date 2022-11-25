@@ -56,7 +56,6 @@ export default async function auth(req: any, res: any) {
           }
           return null;
         } catch (e) {
-          console.log(e);
           return null;
         }
       },

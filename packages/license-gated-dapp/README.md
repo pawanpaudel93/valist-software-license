@@ -18,6 +18,8 @@ Then open [http://localhost:3000](http://localhost:3000) with your browser to se
 
 - `/` => At the home page of the dapp, you can purchase the Software License NFT. Also, you can sign-in using the License NFT which to access the protected page `/protected` with content loading from a protected api endpoint `/api/protected/secret`. Session of the signed-in account is managed using [NextAuth](https://next-auth.js.org/) with jwt strategy.
 
+- `/protected` => This page is only accessible after sign-in with wallet that has the License NFT for this website. After sign in you can visit this page which loads a random joke from an endpoint which is only accessible for the signed-in wallet.
+
 ### Valist Project
 
 [https://testnets.valist.io/blokchainaholic/valist-license-gating](https://testnets.valist.io/blokchainaholic/valist-license-gating)

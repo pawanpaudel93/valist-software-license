@@ -1,20 +1,36 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Box, Heading, Text } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import AccessDenied from "@/components/AccessDenied";
+import {
+  Box,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 
 export default function ProtectedPage() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const [content, setContent] = useState();
+  const [isFetching, setIsFetching] = useState(false);
 
   const fetchData = async () => {
-    const res = await fetch("/api/protected/secret");
-    const json = await res.json();
-    if (json.content) {
-      setContent(json.content);
+    setIsFetching(true);
+    try {
+      const res = await fetch("/api/protected/jokes");
+      const json = await res.json();
+      if (json.content) {
+        setContent(json.content);
+      }
+    } catch (error) {
+      console.log(error);
     }
+    setIsFetching(false);
   };
 
   // Fetch content from protected route
@@ -43,8 +59,29 @@ export default function ProtectedPage() {
           Protected Page
         </Heading>
         <Text color={"gray.500"}>
-          <strong>{content ?? "\u00a0"}</strong>
+          <strong>
+            This is content from protected API. You can access this content
+            because you are signed in.
+          </strong>
         </Text>
+        <Card align="center" variant="filled">
+          <CardHeader>
+            <Heading size="md"> Awesome Dev Joke</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>{content}</Text>
+          </CardBody>
+          <CardFooter>
+            <Button
+              colorScheme="blue"
+              onClick={() => fetchData()}
+              loadingText="Refreshing..."
+              isLoading={isFetching}
+            >
+              Refresh Joke
+            </Button>
+          </CardFooter>
+        </Card>
       </Box>
     </>
   );

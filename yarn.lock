@@ -2934,6 +2934,11 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
+awesome-dev-jokes@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/awesome-dev-jokes/-/awesome-dev-jokes-1.0.3.tgz#8f2d17b90edc0cbf88511dc9a3d462eb9496dd8a"
+  integrity sha512-NR05SiOoLggOEaRrzQB3q27wId0nc2Z+EI8BfwnggTwKqjvX3Ww6NGhWAt2hr+rRg4xBCSzSSBYVKz5+4TO84w==
+
 axe-core@^4.4.3:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.5.2.tgz#823fdf491ff717ac3c58a52631d4206930c1d9f7"

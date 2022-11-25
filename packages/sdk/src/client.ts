@@ -9,6 +9,13 @@ const erc20ABI = [
 export default class LicenseClient {
   constructor(private license: Contract) {}
 
+  /**
+   * Purchase the License of Project for the recipient with Native coin
+   *
+   * @param projectID Valist Project ID
+   * @param recipient Recipent address to receive the License
+   * @returns Contract transaction
+   */
   async purchaseProduct(
     projectID: BigNumberish,
     recipient: string
@@ -18,6 +25,14 @@ export default class LicenseClient {
     return await purchase(projectID, recipient, { value: price });
   }
 
+  /**
+   * Purchase the License of Project for the recipient with ERC20 tokens
+   *
+   * @param token ERC20 token address to purchase License with
+   * @param projectID Valist Project ID
+   * @param recipient Recipent address to receive the License
+   * @returns Contract transaction
+   */
   async purchaseProductToken(
     token: string,
     projectID: BigNumberish,
@@ -33,6 +48,13 @@ export default class LicenseClient {
     return await purchase(token, projectID, recipient);
   }
 
+  /**
+   * Check if the signer has license to the Project
+   *
+   * @param projectID Valist Project ID
+   * @param signingMessage Message to sign with the wallet
+   * @returns Object containing boolean hasLicense and signature of signed message
+   */
   async checkLicense(
     projectID: BigNumberish,
     signingMessage = 'Authenticate your wallet'
@@ -44,6 +66,13 @@ export default class LicenseClient {
     return { hasLicense: balance.gt(0), signature };
   }
 
+  /**
+   * Get the product balance for the address
+   *
+   * @param address Address to check balance for
+   * @param projectID Valist Project ID
+   * @returns Balance for address
+   */
   async getProductBalance(
     address: string,
     projectID: BigNumberish
@@ -51,11 +80,23 @@ export default class LicenseClient {
     return await this.license.balanceOf(address, projectID);
   }
 
+  /**
+   * Get the product price in native coin
+   *
+   * @param projectID Valist Project ID
+   * @returns Product price in native coin
+   */
   async getProductPrice(projectID: BigNumberish): Promise<BigNumber> {
     const getPrice = this.license['getPrice(uint256)'];
     return await getPrice(projectID);
   }
 
+  /**
+   * Get the product price in ERC20 tokens
+   *
+   * @param projectID Valist Project ID
+   * @returns Product price in ERC20 token
+   */
   async getProductTokenPrice(
     token: string,
     projectID: BigNumberish

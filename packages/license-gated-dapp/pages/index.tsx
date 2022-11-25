@@ -4,6 +4,10 @@ import { SiweMessage } from "siwe";
 import { useAccount, useNetwork, useSigner } from "wagmi";
 import Head from "next/head";
 import NextLink from "next/link";
+import { create, getLicenseAddress, Provider } from "valist-software-license";
+import PurchaseLicense from "@/components/Valist/PurchaseLicense";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { getShortAddress, parseError, PRODUCT_ID } from "@/utils";
 import {
   Box,
   Heading,
@@ -14,10 +18,6 @@ import {
   Stack,
   Center,
 } from "@chakra-ui/react";
-import { create, getLicenseAddress, Provider } from "valist-software-license";
-import PurchaseLicense from "@/components/Valist/PurchaseLicense";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { parseError, PRODUCT_ID } from "@/utils";
 
 function Home() {
   const { chain } = useNetwork();
@@ -30,9 +30,7 @@ function Home() {
   const getAddress = () => {
     if (session) {
       const connectedAddress = session.user?.name;
-      return `${connectedAddress?.slice(0, 6)}...${connectedAddress?.slice(
-        -4
-      )}`;
+      return getShortAddress(connectedAddress as `0x{string}`);
     }
     return "";
   };
@@ -44,7 +42,7 @@ function Home() {
       const message = new SiweMessage({
         domain: window.location.host,
         address: address,
-        statement: "Sign in with Polygon to the app.",
+        statement: "Sign in with Valist Software License NFT to this dapp.",
         uri: window.location.origin,
         version: "1",
         chainId: chain?.id,

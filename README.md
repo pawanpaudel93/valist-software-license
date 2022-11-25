@@ -62,7 +62,7 @@ yarn
     .
     ├── packages                 # All workspaces
     │   ├── sdk                  # Valist software license lightweight SDK.
-    │   ├── license-gated-dapp   # License gated Dapp utilizing valist software license sdk
+    │   ├── license-gated-dapp   # License gated nextjs Dapp utilizing valist software license sdk
     └── ...
 
 ## Author

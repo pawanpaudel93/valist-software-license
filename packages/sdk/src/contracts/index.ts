@@ -2,6 +2,12 @@ import * as licenseContract from './License.json';
 
 export const licenseABI = licenseContract.abi;
 
+/**
+ * Get Valist License contract address for chain id
+ *
+ * @param chainId Chain ID
+ * @returns Contract address
+ */
 export function getLicenseAddress(chainId: number): string {
   switch (chainId) {
     case 137: // Polygon mainnet
