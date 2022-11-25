@@ -45,9 +45,10 @@ export default async function auth(req: any, res: any) {
               chainId: result.data.chainId,
               licenseAddress: getLicenseAddress(result.data.chainId),
             });
-            const hasLicense = (
-              await client.getProductBalance(siwe.address, PRODUCT_ID)
-            ).gt(0);
+            const hasLicense = await client.hasLicense(
+              siwe.address,
+              PRODUCT_ID
+            );
             if (hasLicense) {
               return {
                 id: siwe.address,
