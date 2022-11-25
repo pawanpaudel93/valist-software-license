@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAccount, useNetwork, useSigner } from "wagmi";
-import { create, getLicenseAddress, Provider } from "valist-software-license";
 import { Session } from "next-auth";
 import { toast } from "react-toastify";
 import {
@@ -19,6 +18,7 @@ import {
   useColorModeValue,
   createIcon,
 } from "@chakra-ui/react";
+import { create, getLicenseAddress, Provider } from "valist-software-license";
 
 const Arrow = createIcon({
   displayName: "Arrow",
