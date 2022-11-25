@@ -30,7 +30,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "token-gating-dapp",
+  appName: "license-gated-dapp",
   chains,
 });
 

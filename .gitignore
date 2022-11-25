@@ -14,14 +14,14 @@ typechain
 
 # next.js
 
-/packages/token-gating-dapp/node_modules
-packages/token-gating-dapp/.next/
+/packages/license-gated-dapp/node_modules
+packages/license-gated-dapp/.next/
 /out/
 
 # vite
 
-/packages/token-gating-dapp/node_modules
-/packages/token-gating-dapp/dist
+/packages/license-gated-dapp/node_modules
+/packages/license-gated-dapp/dist
 
 # production
 

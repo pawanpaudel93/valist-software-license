@@ -7,6 +7,7 @@
 - [About](#about)
 - [Installing](#installing)
 - [Development](#development)
+- [Folder Structure](#packages)
 - [Contributing](#contributing)
 
 ## About <a name = "about"></a>
@@ -55,6 +56,14 @@ cd valist-software-license
 
 yarn
 ```
+
+## 🧐 Folder Structure <a name = "packages"></a>
+
+    .
+    ├── packages                 # All workspaces
+    │   ├── sdk                  # Valist software license lightweight SDK.
+    │   ├── license-gated-dapp   # License gated Dapp utilizing valist software license sdk
+    └── ...
 
 ## Author
 
