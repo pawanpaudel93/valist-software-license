@@ -65,17 +65,23 @@ export function Footer() {
             <Image src="logo-header.png" alt="logo" width="20" />
           </Box>
         </NextLink>
-        <Text>© 2022 Token Gating. All rights reserved</Text>
+        <Text>© 2022 License Gated Dapp. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
+          <SocialButton
+            label={"Twitter"}
+            href={"https://twitter.com/Blokchainaholic"}
+          >
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
+          <SocialButton
+            label={"YouTube"}
+            href={"https://www.youtube.com/channel/UCIyxpMBXlSB9QxaUxkpoAlQ"}
+          >
             <FaYoutube />
           </SocialButton>
           <SocialButton
             label={"Github"}
-            href={"https://github.com/pawanpaudel93/LensNote"}
+            href={"https://github.com/pawanpaudel93/valist-software-license"}
           >
             <FaGithub />
           </SocialButton>

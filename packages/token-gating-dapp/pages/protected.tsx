@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import AccessDenied from "../components/AccessDenied";
+import AccessDenied from "@/components/AccessDenied";
 
 export default function ProtectedPage() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const [content, setContent] = useState();
 
+  const fetchData = async () => {
+    const res = await fetch("/api/protected/secret");
+    const json = await res.json();
+    if (json.content) {
+      setContent(json.content);
+    }
+  };
+
   // Fetch content from protected route
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/protected/secret");
-      const json = await res.json();
-      if (json.content) {
-        setContent(json.content);
-      }
-    };
     fetchData();
   }, [session]);
 

@@ -49,7 +49,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <SessionProvider refetchInterval={0} session={pageProps.session}>
         <RainbowKitProvider coolMode chains={chains}>
           <NextHead>
-            <title>Token Gating Dapp</title>
+            <title>License Gated Dapp</title>
           </NextHead>
           <ChakraProvider>
             <NavBar />

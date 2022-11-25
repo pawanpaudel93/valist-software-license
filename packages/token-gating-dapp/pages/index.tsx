@@ -120,18 +120,18 @@ function Home() {
             fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
             lineHeight={"110%"}
           >
-            Valist Software License NFT
+            Valist Software License
             <br />
             <Text as={"span"} color={"green.400"}>
-              NFT Gated Content
+              NFT Gated Website
             </Text>
           </Heading>
           <Text color={"gray.500"}>
             Serve exclusive content to users who own the License NFT to the
             website.
             <br />
-            You cannot access the protected pages unless purchase a Software
-            License NFTs.
+            You cannot access the protected pages unless you purchase a Software
+            License NFT.
           </Text>
           <div>
             {isConnected ? (
