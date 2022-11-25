@@ -62,22 +62,20 @@ export default class LicenseClient {
     const signature = await this.license.signer.signMessage(signingMessage);
     const digest = arrayify(hashMessage(signingMessage));
     const recoveredAddress = recoverAddress(digest, signature);
-    const balance = await this.getProductBalance(recoveredAddress, projectID);
-    return { hasLicense: balance.gt(0), signature };
+    const hasLicense = await this.hasLicense(recoveredAddress, projectID);
+    return { hasLicense, signature };
   }
 
   /**
-   * Get the product balance for the address
+   * Check if address has License NFT for Project
    *
-   * @param address Address to check balance for
+   *  @param address Address to check license for
    * @param projectID Valist Project ID
-   * @returns Balance for address
+   * @returns Boolean value to indicate license is present or not
    */
-  async getProductBalance(
-    address: string,
-    projectID: BigNumberish
-  ): Promise<BigNumber> {
-    return await this.license.balanceOf(address, projectID);
+  async hasLicense(address: string, projectID: BigNumberish): Promise<boolean> {
+    const balance = await this.license.balanceOf(address, projectID);
+    return balance.gt(0);
   }
 
   /**

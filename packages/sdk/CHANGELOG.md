@@ -9,3 +9,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### 0.0.2 (2022-11-24)
 
 - Updated `checkLicense` method to output `hasLicense` and `signature`.
+
+### 0.0.3 (2022-11-24)
+
+- Added `hasLicense` method to check if an address has license for a project or not

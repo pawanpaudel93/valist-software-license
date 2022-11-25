@@ -6,7 +6,7 @@ This folder contains the Valist Software License SDK library.
 
 For the TypeScript API documentation, please see the following link:
 
-* [TypeScript API Docs](https://docs.valist.io/lib/classes/_index_.valist.html)
+* [TypeScript API Docs](https://pawanpaudel93.github.io/valist-software-license/)
 
 ## Install
 

@@ -1,6 +1,6 @@
 {
   "name": "valist-software-license",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Valist Software license",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
