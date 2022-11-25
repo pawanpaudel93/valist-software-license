@@ -9,7 +9,8 @@
     "build": "yarn workspace license-gated-dapp build",
     "start": "yarn workspace license-gated-dapp start",
     "lint": "yarn workspace license-gated-dapp lint",
-    "build-sdk": "yarn workspace valist-software-license build"
+    "build-sdk": "yarn workspace valist-software-license build",
+    "test": "yarn workspace valist-software-license test"
   },
   "workspaces": {
     "packages": [
@@ -17,7 +18,7 @@
     ],
     "nohoist": []
   },
-  "dependencies": {
+  "resolutions": {
     "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.2.tgz"
   }
 }

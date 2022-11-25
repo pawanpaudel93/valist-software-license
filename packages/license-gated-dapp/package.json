@@ -35,8 +35,5 @@
     "eslint": "^8.27.0",
     "eslint-config-next": "^13.0.2",
     "typescript": "^4.8.4"
-  },
-  "resolutions": {
-    "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.2.tgz"
   }
 }
