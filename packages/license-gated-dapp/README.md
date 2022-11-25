@@ -20,6 +20,11 @@ Then open [http://localhost:3000](http://localhost:3000) with your browser to se
 
 - `/protected` => This page is only accessible after sign-in with wallet that has the License NFT for this website. After sign in you can visit this page which loads a random joke from an endpoint which is only accessible for the signed-in wallet.
 
+### API Endpoints
+
+- `/api/auth/*` => NextAuth endpoints for authentication.
+- `/api/protected/jokes` => Protected endpoint to get random dev jokes.
+
 ### Valist Project
 
 [https://testnets.valist.io/blokchainaholic/valist-license-gating](https://testnets.valist.io/blokchainaholic/valist-license-gating)
