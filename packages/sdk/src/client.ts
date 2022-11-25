@@ -7,7 +7,7 @@ const erc20ABI = [
 ];
 
 export default class LicenseClient {
-  constructor(public license: Contract) {}
+  constructor(private license: Contract) {}
 
   async purchaseProduct(
     projectID: BigNumberish,
