@@ -10,15 +10,16 @@
     "start": "yarn workspace license-gated-dapp start",
     "lint": "yarn workspace license-gated-dapp lint",
     "build-sdk": "yarn workspace valist-software-license build",
-    "test": "yarn workspace valist-software-license test"
+    "test": "yarn workspace valist-software-license test",
+    "fix": "yarn workspace valist-software-license fix",
+    "doc": "yarn workspace valist-software-license doc",
+    "doc:html": "yarn workspace valist-software-license doc:html",
+    "doc:publish": "yarn workspace valist-software-license doc:publish"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ],
     "nohoist": []
-  },
-  "resolutions": {
-    "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.3.tgz"
   }
 }

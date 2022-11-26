@@ -18,7 +18,7 @@ import {
   useColorModeValue,
   createIcon,
 } from "@chakra-ui/react";
-import { create, getLicenseAddress, Provider } from "valist-software-license";
+import { create, getLicenseAddress, Signer } from "valist-software-license";
 
 const Arrow = createIcon({
   displayName: "Arrow",
@@ -49,7 +49,7 @@ function PurchaseLicense({
   const purchaseLicense = async () => {
     const id = toast.loading("Purchasing License...");
     try {
-      const client = await create(signer as unknown as Provider, {
+      const client = await create(signer as Signer, {
         chainId: chain?.id,
         licenseAddress: getLicenseAddress(chain?.id!),
       });

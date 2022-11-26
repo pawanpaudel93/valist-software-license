@@ -4,6 +4,8 @@ import { arrayify, hashMessage, recoverAddress } from 'ethers/lib/utils';
 // minimal ABI for interacting with erc20 tokens
 const erc20ABI = [
   'function approve(address spender, uint256 amount) returns (bool)',
+  'function balanceOf(address account) view returns (uint256)',
+  'function allowance(address owner, address spender) view returns (uint256)',
 ];
 
 export default class LicenseClient {
@@ -20,7 +22,12 @@ export default class LicenseClient {
     projectID: BigNumberish,
     recipient: string
   ): Promise<ContractTransaction> {
-    const price = await this.getProductPrice(projectID);
+    // get product license price
+    const getPrice = this.license['getPrice(uint256)'];
+    const price: BigNumber = await getPrice(projectID);
+    const signerBalance: BigNumber = await this.license.signer.getBalance();
+    // check if signer has sufficient balance
+    if (signerBalance.lt(price)) throw Error('Insufficient Balance');
     const purchase = this.license['purchase(uint256,address)'];
     return await purchase(projectID, recipient, { value: price });
   }
@@ -39,10 +46,29 @@ export default class LicenseClient {
     recipient: string
   ): Promise<ContractTransaction> {
     const erc20 = new Contract(token, erc20ABI, this.license.signer);
-    const price = await this.getProductTokenPrice(token, projectID);
-    // approve the transfer
-    const approveTx = await erc20.approve(this.license.address, price);
-    await approveTx.wait();
+    // get Product Price in terms of token
+    const getPrice = this.license['getPrice(address,uint256)'];
+    const price: BigNumber = await getPrice(token, projectID);
+    // get balance of signer
+    const balanceOf = erc20['balanceOf(address)'];
+    const signerAddress = await this.license.signer.getAddress();
+    const signerBalance: BigNumber = await balanceOf(signerAddress);
+    // check if signer balance is sufficient
+    if (signerBalance.lt(price)) throw Error(`Insufficient Token Balance`);
+    // check allowance for license contract
+    const allowanceForLicense = erc20['allowance(address,address)'];
+    const allowance: BigNumber = await allowanceForLicense(
+      signerAddress,
+      this.license.address
+    );
+    if (allowance.lt(price)) {
+      // if allowance is less approve the required allowance
+      const approveTx = await erc20.approve(
+        this.license.address,
+        price.sub(allowance)
+      );
+      await approveTx.wait();
+    }
     // purchase the product
     const purchase = this.license['purchase(address,uint256,address)'];
     return await purchase(token, projectID, recipient);
@@ -76,30 +102,5 @@ export default class LicenseClient {
   async hasLicense(address: string, projectID: BigNumberish): Promise<boolean> {
     const balance = await this.license.balanceOf(address, projectID);
     return balance.gt(0);
-  }
-
-  /**
-   * Get the product price in native coin
-   *
-   * @param projectID Valist Project ID
-   * @returns Product price in native coin
-   */
-  async getProductPrice(projectID: BigNumberish): Promise<BigNumber> {
-    const getPrice = this.license['getPrice(uint256)'];
-    return await getPrice(projectID);
-  }
-
-  /**
-   * Get the product price in ERC20 tokens
-   *
-   * @param projectID Valist Project ID
-   * @returns Product price in ERC20 token
-   */
-  async getProductTokenPrice(
-    token: string,
-    projectID: BigNumberish
-  ): Promise<BigNumber> {
-    const getPrice = this.license['getPrice(address,uint256)'];
-    return await getPrice(token, projectID);
   }
 }

@@ -1,6 +1,10 @@
-import * as licenseContract from './License.json';
-
-export const licenseABI = licenseContract.abi;
+export const licenseABI = [
+  'function purchase(uint256 _projectID, address _recipient) payable',
+  'function purchase(address _token, uint256 _projectID, address _recipient) payable',
+  'function balanceOf(address account, uint256 id) view returns (uint256)',
+  'function getPrice(uint256 _projectID) view returns (uint256)',
+  'function getPrice(address _token, uint256 _projectID) view returns (uint256)',
+];
 
 /**
  * Get Valist License contract address for chain id
