@@ -19,7 +19,7 @@ export interface Options {
 /**
  * Create a Valist License client using the given provider.
  *
- * @param providerOrSigner Provider to use for transactions
+ * @param providerOrSigner Provider/Signer to use for transactions
  * @param options Additional client options
  * @returns instance of LicenseClient
  */
