@@ -1,11 +1,10 @@
 import test from 'ava';
-import { BigNumber, ethers, Wallet } from 'ethers';
+import { ethers, Wallet } from 'ethers';
 
-import { create, Provider } from './index';
+import { create, Signer } from './index';
 
-const PRODUCT_ID = BigNumber.from(
-  '0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc2e905'
-);
+const PRODUCT_ID =
+  '0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc2e905';
 const CHAINLINK_TOKEN = '0x326C977E6efc84E512bB9C30f76E30c160eD06FB';
 
 const createRandomWallet = async () => {
@@ -21,9 +20,7 @@ const createRandomWallet = async () => {
 
 test('Wallet has no Valist Software License', async (t) => {
   const { wallet, address } = await createRandomWallet();
-  const client = await create(wallet, {
-    chainId: 80001,
-  });
+  const client = await create(wallet);
   const hasLicense = await client.hasLicense(address, PRODUCT_ID);
   t.assert(hasLicense === false);
 });
@@ -32,9 +29,7 @@ test('Check for a address if it has Valist Software License', async (t) => {
   const provider = new ethers.providers.JsonRpcProvider(
     'https://rpc.ankr.com/polygon_mumbai'
   );
-  const client = await create(provider, {
-    chainId: 80001,
-  });
+  const client = await create(provider);
   const hasLicense = await client.hasLicense(
     '0xFf57433E786C00e0df38bA17a9724EC78C3F6f5B',
     PRODUCT_ID
@@ -44,7 +39,7 @@ test('Check for a address if it has Valist Software License', async (t) => {
 
 test('Wallet has insufficient balance', async (t) => {
   const { wallet, address } = await createRandomWallet();
-  const client = await create(wallet as unknown as Provider, {
+  const client = await create(wallet as Signer, {
     chainId: 80001,
   });
   const error = await t.throwsAsync(async () =>
@@ -55,7 +50,7 @@ test('Wallet has insufficient balance', async (t) => {
 
 test('Wallet has insufficient token balance', async (t) => {
   const { wallet, address } = await createRandomWallet();
-  const client = await create(wallet as unknown as Provider, {
+  const client = await create(wallet as Signer, {
     chainId: 80001,
   });
   const error = await t.throwsAsync(async () =>

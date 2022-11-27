@@ -1,12 +1,7 @@
 import { BigNumber, BigNumberish, Contract, ContractTransaction } from 'ethers';
 import { arrayify, hashMessage, recoverAddress } from 'ethers/lib/utils';
 
-// minimal ABI for interacting with erc20 tokens
-const erc20ABI = [
-  'function approve(address spender, uint256 amount) returns (bool)',
-  'function balanceOf(address account) view returns (uint256)',
-  'function allowance(address owner, address spender) view returns (uint256)',
-];
+import { erc20ABI, multiCallABI, multiCallContractAddress } from './contracts';
 
 export default class LicenseClient {
   constructor(private license: Contract) {}
@@ -22,6 +17,14 @@ export default class LicenseClient {
     projectID: BigNumberish,
     recipient: string
   ): Promise<ContractTransaction> {
+    // check if signer is present
+    if (!this.license.signer) {
+      throw Error('Sending a transaction requires a signer');
+    }
+    // check if supply is available
+    if (!(await this.#isSupplyAvailable(projectID))) {
+      throw Error('Product License supply has finished');
+    }
     // get product license price
     const getPrice = this.license['getPrice(uint256)'];
     const price: BigNumber = await getPrice(projectID);
@@ -45,6 +48,14 @@ export default class LicenseClient {
     projectID: BigNumberish,
     recipient: string
   ): Promise<ContractTransaction> {
+    // check if signer is present
+    if (!this.license.signer) {
+      throw Error('Sending a transaction requires a signer');
+    }
+    // check if supply is available
+    if (!(await this.#isSupplyAvailable(projectID))) {
+      throw Error('Product License supply has finished');
+    }
     const erc20 = new Contract(token, erc20ABI, this.license.signer);
     // get Product Price in terms of token
     const getPrice = this.license['getPrice(address,uint256)'];
@@ -85,6 +96,10 @@ export default class LicenseClient {
     projectID: BigNumberish,
     signingMessage = 'Authenticate your wallet'
   ) {
+    // check if signer is present
+    if (!this.license.signer) {
+      throw Error('Signing a message requires a signer');
+    }
     const signature = await this.license.signer.signMessage(signingMessage);
     const digest = arrayify(hashMessage(signingMessage));
     const recoveredAddress = recoverAddress(digest, signature);
@@ -97,10 +112,41 @@ export default class LicenseClient {
    *
    *  @param address Address to check license for
    * @param projectID Valist Project ID
-   * @returns Boolean value to indicate license is present or not
+   * @returns Boolean value to indicate if license is present or not
    */
   async hasLicense(address: string, projectID: BigNumberish): Promise<boolean> {
     const balance = await this.license.balanceOf(address, projectID);
     return balance.gt(0);
+  }
+
+  /**
+   * Check if license supply is available
+   *
+   * @param projectID Valist Project ID
+   * @returns Boolean value to indicate if supply is present or not
+   */
+  async #isSupplyAvailable(projectID: BigNumberish) {
+    const multiCall = new Contract(
+      multiCallContractAddress,
+      multiCallABI,
+      this.license.provider
+    );
+    const output = await multiCall.callStatic.aggregate([
+      {
+        target: this.license.address,
+        callData: this.license.interface.encodeFunctionData('getLimit', [
+          projectID,
+        ]),
+      },
+      {
+        target: this.license.address,
+        callData: this.license.interface.encodeFunctionData('getSupply', [
+          projectID,
+        ]),
+      },
+    ]);
+    const licenseLimit = BigNumber.from(output[1][0]);
+    const licenseSupply = BigNumber.from(output[1][1]);
+    return licenseSupply.lt(licenseLimit);
   }
 }

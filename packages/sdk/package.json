@@ -1,11 +1,11 @@
 {
   "name": "valist-software-license",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Valist Software license",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/pawanpaudel93/valist-software-license",
+  "repository": "https://github.com/pawanpaudel93/valist-software-license/tree/main/packages/sdk",
   "license": "MIT",
   "keywords": [],
   "scripts": {

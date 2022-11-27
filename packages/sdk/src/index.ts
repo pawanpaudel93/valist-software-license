@@ -1,7 +1,11 @@
 import { ethers } from 'ethers';
 
 import LicenseClient from './client';
-import { getLicenseAddress, licenseABI } from './contracts';
+import {
+  licenseABI,
+  licenseContractAddress,
+  supportedChainIds,
+} from './contracts';
 
 // providers & signers accepted by the client constructor helpers
 export type Signer = ethers.providers.JsonRpcSigner | ethers.Wallet;
@@ -19,31 +23,36 @@ export interface Options {
 /**
  * Create a Valist License client using the given provider.
  *
- * @param providerOrSigner Provider/Signer to use for transactions
- * @param options Additional client options
+ * @param {Provider | Signer} providerOrSigner Provider/Signer to use for transactions
+ * @param {Partial<Options>} [options={}] Additional client options
  * @returns instance of LicenseClient
  */
 export async function create(
   providerOrSigner: Provider | Signer,
-  options: Partial<Options>
+  options: Partial<Options> = {}
 ) {
   if (!options.chainId && !options.licenseAddress) {
     try {
       let network: ethers.providers.Network;
       const signer = providerOrSigner as Signer;
-      if (signer.provider && signer.provider.getNetwork) {
+      if (signer.provider && signer.provider?.getNetwork) {
         network = await signer.provider.getNetwork();
       } else {
         network = await (providerOrSigner as Provider).getNetwork();
       }
       options.chainId = network.chainId;
     } catch (error) {
-      throw Error("chainId couldn't be determined. Please pass chainId");
+      throw Error(
+        "chainId couldn't be determined. Please pass chainId in options"
+      );
     }
   }
 
-  const licenseAddress =
-    options.licenseAddress || getLicenseAddress(options.chainId);
+  if (supportedChainIds.indexOf(options.chainId) === -1) {
+    throw new Error(`Unsupported network chainId=${options.chainId}`);
+  }
+
+  const licenseAddress = options?.licenseAddress || licenseContractAddress;
 
   let license: ethers.Contract;
 
@@ -58,4 +67,4 @@ export async function create(
   return new LicenseClient(license);
 }
 
-export { LicenseClient, getLicenseAddress };
+export { LicenseClient };
