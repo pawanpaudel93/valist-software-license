@@ -23,9 +23,6 @@
     "nohoist": []
   },
   "resolutions": {
-    "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.4.tgz"
-  },
-  "dependencies": {
-    "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.4.tgz"
+    "valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.5.tgz"
   }
 }

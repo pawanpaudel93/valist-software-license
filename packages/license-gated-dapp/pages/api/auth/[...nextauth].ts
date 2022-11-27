@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getCsrfToken } from "next-auth/react";
 import { SiweMessage } from "siwe";
-import { create, getLicenseAddress } from "valist-software-license";
+import { create } from "valist-software-license";
 import { ethers } from "ethers";
 import { PRODUCT_ID } from "@/utils";
 
@@ -43,7 +43,6 @@ export default async function auth(req: any, res: any) {
             );
             const client = await create(provider, {
               chainId: result.data.chainId,
-              licenseAddress: getLicenseAddress(result.data.chainId),
             });
             const hasLicense = await client.hasLicense(
               siwe.address,

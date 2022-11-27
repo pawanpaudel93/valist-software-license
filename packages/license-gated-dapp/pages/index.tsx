@@ -4,7 +4,7 @@ import { SiweMessage } from "siwe";
 import { useAccount, useNetwork, useSigner } from "wagmi";
 import Head from "next/head";
 import NextLink from "next/link";
-import { create, getLicenseAddress, Signer } from "valist-software-license";
+import { create, Signer } from "valist-software-license";
 import PurchaseLicense from "@/components/Valist/PurchaseLicense";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { getShortAddress, parseError, PRODUCT_ID } from "@/utils";
@@ -50,7 +50,6 @@ function Home() {
       });
       const client = await create(signer as Signer, {
         chainId: chain?.id,
-        licenseAddress: getLicenseAddress(chain?.id!),
       });
       const { hasLicense, signature } = await client.checkLicense(
         PRODUCT_ID,
