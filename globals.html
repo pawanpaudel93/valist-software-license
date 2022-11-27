@@ -83,6 +83,7 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias"><a href="globals.html#provider" class="tsd-kind-icon">Provider</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#signer" class="tsd-kind-icon">Signer</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -110,7 +111,17 @@
 					<div class="tsd-signature tsd-kind-icon">Provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JsonRpcProvider</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Web3Provider</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/index.ts#L7">index.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/index.ts#L9">index.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="signer" class="tsd-anchor"></a>
+					<h3>Signer</h3>
+					<div class="tsd-signature tsd-kind-icon">Signer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JsonRpcSigner</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Wallet</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/index.ts#L7">index.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,20 +131,20 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="erc20abi" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> erc20ABI</h3>
-					<div class="tsd-signature tsd-kind-icon">erc20ABI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;function approve(address spender, uint256 amount) returns (bool)&#x27;,]</span></div>
+					<div class="tsd-signature tsd-kind-icon">erc20ABI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;function approve(address spender, uint256 amount) returns (bool)&#x27;,&#x27;function balanceOf(address account) view returns (uint256)&#x27;,&#x27;function allowance(address owner, address spender) view returns (uint256)&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L5">client.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L5">client.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="licenseabi" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> licenseABI</h3>
-					<div class="tsd-signature tsd-kind-icon">licenseABI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">{ </span>inputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>internalType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>stateMutability<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>anonymous<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>inputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>indexed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>internalType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>inputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>internalType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>outputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>internalType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>stateMutability<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = licenseContract.abi</span></div>
+					<div class="tsd-signature tsd-kind-icon">licenseABI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;function purchase(uint256 _projectID, address _recipient) payable&#x27;,&#x27;function purchase(address _token, uint256 _projectID, address _recipient) payable&#x27;,&#x27;function balanceOf(address account, uint256 id) view returns (uint256)&#x27;,&#x27;function getPrice(uint256 _projectID) view returns (uint256)&#x27;,&#x27;function getPrice(address _token, uint256 _projectID) view returns (uint256)&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/contracts/index.ts#L3">contracts/index.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/contracts/index.ts#L1">contracts/index.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -144,26 +155,26 @@
 					<a name="create" class="tsd-anchor"></a>
 					<h3>create</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>provider<span class="tsd-signature-symbol">: </span><a href="globals.html#provider" class="tsd-signature-type">Provider</a>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="classes/licenseclient.html" class="tsd-signature-type">LicenseClient</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>providerOrSigner<span class="tsd-signature-symbol">: </span><a href="globals.html#provider" class="tsd-signature-type">Provider</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#signer" class="tsd-signature-type">Signer</a>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="classes/licenseclient.html" class="tsd-signature-type">LicenseClient</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/index.ts#L23">index.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/index.ts#L26">index.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a Valist client using the given JSON RPC provider.</p>
+									<p>Create a Valist License client using the given provider.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>provider: <a href="globals.html#provider" class="tsd-signature-type">Provider</a></h5>
+									<h5>providerOrSigner: <a href="globals.html#provider" class="tsd-signature-type">Provider</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#signer" class="tsd-signature-type">Signer</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Provider to use for transactions</p>
+										<p>Provider/Signer to use for transactions</p>
 									</div>
 								</li>
 								<li>
@@ -174,6 +185,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="classes/licenseclient.html" class="tsd-signature-type">LicenseClient</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>instance of LicenseClient</p>
 						</li>
 					</ul>
 				</section>
@@ -187,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/contracts/index.ts#L11">contracts/index.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/contracts/index.ts#L15">contracts/index.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -229,6 +241,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#provider" class="tsd-kind-icon">Provider</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#signer" class="tsd-kind-icon">Signer</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#erc20abi" class="tsd-kind-icon">erc20ABI</a>

@@ -94,8 +94,6 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#checklicense" class="tsd-kind-icon">check<wbr>License</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#getproductprice" class="tsd-kind-icon">get<wbr>Product<wbr>Price</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#getproducttokenprice" class="tsd-kind-icon">get<wbr>Product<wbr>Token<wbr>Price</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#haslicense" class="tsd-kind-icon">has<wbr>License</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#purchaseproduct" class="tsd-kind-icon">purchase<wbr>Product</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseclient.html#purchaseproducttoken" class="tsd-kind-icon">purchase<wbr>Product<wbr>Token</a></li>
@@ -116,7 +114,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L9">client.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L11">client.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,7 +136,7 @@
 					<div class="tsd-signature tsd-kind-icon">license<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Contract</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L10">client.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L12">client.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -155,7 +153,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L58">client.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L84">client.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -184,73 +182,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getproductprice" class="tsd-anchor"></a>
-					<h3>get<wbr>Product<wbr>Price</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Product<wbr>Price<span class="tsd-signature-symbol">(</span>projectID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumberish</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L87">client.ts:87</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get the product price in native coin</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>projectID: <span class="tsd-signature-type">BigNumberish</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Valist Project ID</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Product price in native coin</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getproducttokenprice" class="tsd-anchor"></a>
-					<h3>get<wbr>Product<wbr>Token<wbr>Price</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Product<wbr>Token<wbr>Price<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, projectID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumberish</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L98">client.ts:98</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get the product price in ERC20 tokens</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>token: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>projectID: <span class="tsd-signature-type">BigNumberish</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Valist Project ID</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Product price in ERC20 token</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="haslicense" class="tsd-anchor"></a>
 					<h3>has<wbr>License</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -260,7 +191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L76">client.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L102">client.ts:102</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,7 +229,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L19">client.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L21">client.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -336,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/b86a281/packages/sdk/src/client.ts#L36">client.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/pawanpaudel93/valist-software-license/blob/462e5cc/packages/sdk/src/client.ts#L43">client.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,12 +328,6 @@
 								<a href="licenseclient.html#checklicense" class="tsd-kind-icon">check<wbr>License</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="licenseclient.html#getproductprice" class="tsd-kind-icon">get<wbr>Product<wbr>Price</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="licenseclient.html#getproducttokenprice" class="tsd-kind-icon">get<wbr>Product<wbr>Token<wbr>Price</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="licenseclient.html#haslicense" class="tsd-kind-icon">has<wbr>License</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -420,6 +345,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#provider" class="tsd-kind-icon">Provider</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#signer" class="tsd-kind-icon">Signer</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#erc20abi" class="tsd-kind-icon">erc20ABI</a>
