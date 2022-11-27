@@ -2,6 +2,10 @@
 
 # Valist Software License lightweight SDK
 
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.5-blue.svg?cacheSeconds=2592000" />
+</p>
+
 ## About
 
 [Valist](https://valist.io/) is the Universal software deployment and monetization protocol. Valist Software License is the lightweight sdk of [valist-sdk](https://github.com/valist-io/valist-js/tree/main/packages/valist-sdk) only having fewer core functionality like `purchaseProduct`, `purchaseProductToken`, `checkLicense` and `hasLicense`.

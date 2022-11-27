@@ -2,6 +2,10 @@
 
 # Valist lightweight TypeScript SDK & License NFT Gated Dapp
 
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.5-blue.svg?cacheSeconds=2592000" />
+</p>
+
 ## Table of Contents
 
 - [About](#about)
@@ -23,6 +27,8 @@ A `checkLicense` function that:
 A `purchaseProduct` function that prompts the user to purchase the Software License NFT with native MATIC.
 
 A `purchaseProductToken` function that prompts the user to purchase the Software License NFT with the user's desired (and supported) token.
+
+A `hasLicense` function that checks whether a given address has license to a given product ID.
 
 Learn more about [Valist](https://valist.io/).
 
