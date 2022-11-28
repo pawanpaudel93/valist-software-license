@@ -1,4 +1,6 @@
-[![Logo](https://raw.githubusercontent.com/valist-io/valist/main/img/logo-header.png)](https://valist.io)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/pawanpaudel93/valist-software-license/main/logo.png" alt="Valist Software License SDK" />
+</div>
 
 # Valist lightweight TypeScript SDK & License NFT Gated Dapp
 
