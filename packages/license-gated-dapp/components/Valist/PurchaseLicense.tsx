@@ -36,10 +36,10 @@ const Arrow = createIcon({
 
 function PurchaseLicense({
   session,
-  isAuthenticated,
+  isConnected
 }: {
   session?: Session | null;
-  isAuthenticated?: boolean;
+  isConnected?: boolean;
 }) {
   const { chain } = useNetwork();
   const { address } = useAccount();
@@ -86,7 +86,7 @@ function PurchaseLicense({
     }
   };
 
-  if (session || isAuthenticated) return <></>;
+  if (session || !isConnected) return <></>;
 
   return (
     <>

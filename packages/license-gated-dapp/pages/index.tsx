@@ -199,7 +199,7 @@ function Home() {
               </Center>
             )}
           </div>
-          <PurchaseLicense session={session} />
+          <PurchaseLicense session={session} isConnected={isConnected} />
         </Stack>
       </Container>
     </>
