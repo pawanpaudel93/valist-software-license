@@ -18,6 +18,7 @@ import {
   useColorModeValue,
   createIcon,
 } from "@chakra-ui/react";
+import { BiPurchaseTag } from "react-icons/bi";
 import { create, Signer } from "valist-software-license";
 
 const Arrow = createIcon({
@@ -108,13 +109,11 @@ function PurchaseLicense({
       >
         <Button
           colorScheme={"green"}
-          bg={"green.400"}
-          rounded={"full"}
           px={6}
-          _hover={{
-            bg: "green.500",
-          }}
+          variant="outline"
+          rounded="full"
           isLoading={isPurchasing}
+          leftIcon={<BiPurchaseTag />}
           loadingText="Purchasing..."
           onClick={async (e) => {
             e.preventDefault();

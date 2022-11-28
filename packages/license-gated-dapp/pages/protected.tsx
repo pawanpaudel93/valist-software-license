@@ -73,7 +73,8 @@ export default function ProtectedPage() {
           </CardBody>
           <CardFooter>
             <Button
-              colorScheme="blue"
+              variant="outline"
+              colorScheme="whatsapp"
               onClick={() => fetchData()}
               loadingText="Refreshing..."
               isLoading={isFetching}

@@ -24,6 +24,7 @@ import {
   MoonIcon,
   SunIcon,
 } from "@chakra-ui/icons";
+import { HiHome } from "react-icons/hi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";

@@ -8,6 +8,8 @@ import { create, Signer } from "valist-software-license";
 import PurchaseLicense from "@/components/Valist/PurchaseLicense";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { getShortAddress, parseError, PRODUCT_ID } from "@/utils";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import {
   Box,
   Heading,
@@ -17,6 +19,7 @@ import {
   Button,
   Stack,
   Center,
+  Image,
 } from "@chakra-ui/react";
 
 function Home() {
@@ -109,8 +112,8 @@ function Home() {
         <Stack
           as={Box}
           textAlign={"center"}
-          spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
+          spacing={{ base: 5, md: 10 }}
+          py={{ base: 16, md: 24 }}
         >
           <Heading
             fontWeight={500}
@@ -134,11 +137,25 @@ function Home() {
             {isConnected ? (
               session ? (
                 <div>
+                  <Center>
+                    <Image
+                      borderRadius="full"
+                      boxSize="150px"
+                      src={session.user?.image!}
+                      alt={session.user?.email!}
+                    />
+                  </Center>
                   <p>
                     Welcome, <Text as="b">{getAddress()}</Text>
                   </p>
                   <NextLink passHref href={"/protected"}>
-                    <Button colorScheme="green" rounded={"full"} mr="2">
+                    <Button
+                      colorScheme="green"
+                      rounded={"full"}
+                      mr="2"
+                      variant="outline"
+                      leftIcon={<IoEyeSharp />}
+                    >
                       View protected page
                     </Button>
                   </NextLink>
@@ -147,6 +164,8 @@ function Home() {
                     isLoading={isLoading}
                     loadingText="Signing out..."
                     rounded={"full"}
+                    variant="outline"
+                    leftIcon={<FaSignOutAlt />}
                     onClick={async (e) => {
                       e.preventDefault();
                       setIsLoading(true);
@@ -163,7 +182,9 @@ function Home() {
                   rounded="full"
                   colorScheme="messenger"
                   loadingText="Signing in..."
+                  leftIcon={<FaSignInAlt />}
                   size="lg"
+                  variant="outline"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLogin();

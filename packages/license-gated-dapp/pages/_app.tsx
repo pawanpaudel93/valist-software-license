@@ -2,12 +2,8 @@ import * as React from "react";
 import type { AppProps } from "next/app";
 import NextHead from "next/head";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "../styles/globals.css";
 
 import { ChakraProvider } from "@chakra-ui/react";
-
-// Imports
 import { chain, createClient, WagmiConfig, configureChains } from "wagmi";
 import { SessionProvider } from "next-auth/react";
 import { alchemyProvider } from "wagmi/providers/alchemy";
@@ -15,10 +11,12 @@ import { publicProvider } from "wagmi/providers/public";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-
 import { useIsMounted } from "../hooks";
 import NavBar from "@/components/Navigation/NavBar";
 import { Footer } from "@/components/Navigation/Footer";
+
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
 // Get environment variables
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_ID as string;
