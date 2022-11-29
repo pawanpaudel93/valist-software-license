@@ -4,15 +4,24 @@ import { arrayify, hashMessage, recoverAddress } from 'ethers/lib/utils';
 import { erc20ABI, multiCallABI, multiCallContractAddress } from './contracts';
 
 export default class LicenseClient {
+  /**
+   * Creating a License Client
+   *
+   * @param {Contract} license - License Contract
+   */
   constructor(private license: Contract) {}
 
   /**
    * Purchase the License of Project for the recipient with Native coin
    *
-   * @param projectID Valist Project ID
-   * @param recipient Recipent address to receive the License
-   * @returns Contract transaction
+   * @param {BigNumberish} projectID - Valist Project ID
+   * @param {string} recipient - Recipent address to receive the License
+   * @throws {Error} if signer is not present
+   * @throws {Error} if product license supply is not available
+   * @throws {Error} if signer has insufficient balance to purchase license
+   * @returns {Promise<ContractTransaction>} - Contract transaction
    */
+
   async purchaseProduct(
     projectID: BigNumberish,
     recipient: string
@@ -36,12 +45,15 @@ export default class LicenseClient {
   }
 
   /**
-   * Purchase the License of Project for the recipient with ERC20 tokens
+   * Purchase the License of Project for the recipient with supported ERC20 tokens
    *
-   * @param token ERC20 token address to purchase License with
-   * @param projectID Valist Project ID
-   * @param recipient Recipent address to receive the License
-   * @returns Contract transaction
+   * @param {string} token - Supported ERC20 token address to purchase License with
+   * @param {BigNumberish} projectID - Valist Project ID
+   * @param {string} recipient - Recipent address to receive the License
+   * @throws {Error} if signer is not present
+   * @throws {Error} if product license supply is not available
+   * @throws {Error} if token balance is insufficient to purchase license
+   * @returns {Promise<ContractTransaction>} Contract transaction
    */
   async purchaseProductToken(
     token: string,
@@ -88,9 +100,9 @@ export default class LicenseClient {
   /**
    * Check if the signer has license to the Project
    *
-   * @param projectID Valist Project ID
-   * @param signingMessage Message to sign with the wallet
-   * @returns Object containing boolean hasLicense and signature of signed message
+   * @param {BigNumberish} projectID - Valist Project ID
+   * @param {string} signingMessage - Message to sign with the wallet
+   * @returns {Promise<{hasLicense: boolean, signature: string}>} Object containing boolean hasLicense and signature of signed message
    */
   async checkLicense(
     projectID: BigNumberish,
@@ -98,7 +110,7 @@ export default class LicenseClient {
   ) {
     // check if signer is present
     if (!this.license.signer) {
-      throw Error('Signing a message requires a signer');
+      throw Error('Sending a transaction requires a signer');
     }
     const signature = await this.license.signer.signMessage(signingMessage);
     const digest = arrayify(hashMessage(signingMessage));
@@ -110,9 +122,9 @@ export default class LicenseClient {
   /**
    * Check if address has License NFT for Project
    *
-   *  @param address Address to check license for
-   * @param projectID Valist Project ID
-   * @returns Boolean value to indicate if license is present or not
+   *  @param {string} address - Address to check license for
+   * @param {BigNumberish} projectID - Valist Project ID
+   * @returns {Boolean} Value to indicate if license is present or not
    */
   async hasLicense(address: string, projectID: BigNumberish): Promise<boolean> {
     const balance = await this.license.balanceOf(address, projectID);
@@ -122,8 +134,8 @@ export default class LicenseClient {
   /**
    * Check if license supply is available
    *
-   * @param projectID Valist Project ID
-   * @returns Boolean value to indicate if supply is present or not
+   * @param {BigNumberish} projectID - Valist Project ID
+   * @returns {Boolean} - Value to indicate if supply is present or not
    */
   async #isSupplyAvailable(projectID: BigNumberish) {
     const multiCall = new Contract(

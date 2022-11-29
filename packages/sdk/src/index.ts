@@ -21,11 +21,13 @@ export interface Options {
 }
 
 /**
- * Create a Valist License client using the given provider.
+ * Create a Valist License client using the given provider/signer.
  *
- * @param {Provider | Signer} providerOrSigner Provider/Signer to use for transactions
- * @param {Partial<Options>} [options={}] Additional client options
- * @returns instance of LicenseClient
+ * @param {Provider | Signer} providerOrSigner - Provider/Signer to use for transactions
+ * @param {Partial<Options>} [options={}] - Additional client options
+ * @throws {Error} if chainId couldn't be determined automatically when chainId is not passed in options
+ * @throws {Error} if unsupported chainId is present
+ * @returns {LicenseClient} Instance of LicenseClient
  */
 export async function create(
   providerOrSigner: Provider | Signer,
