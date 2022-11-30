@@ -22,3 +22,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - Optimizing sdk
 - Added signer checks, License supply available checks etc.
+
+### 0.0.6 (2022-11-30)
+
+- Added random nonce to default signing message in checkLicense method of LicenseClient

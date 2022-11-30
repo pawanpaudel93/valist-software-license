@@ -5,7 +5,7 @@
 # Valist lightweight TypeScript SDK & License NFT Gated Dapp
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.5-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.6-blue.svg?cacheSeconds=2592000" />
 </p>
 
 ## Table of Contents
