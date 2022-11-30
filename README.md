@@ -50,12 +50,12 @@ yarn add valist-software-license
 
 ## Development <a name="development"></a>
 
-#### Requirements
+### Requirements
 
 - node >= 18.11.0
-- yarn >= 1.22.19
+- yarn >= 3.3.0
 
-#### Setup
+### Setup
 
 ```bash
 git clone https://github.com/pawanpaudel93/valist-software-license
