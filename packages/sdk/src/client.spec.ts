@@ -25,7 +25,7 @@ test('Wallet has no Valist Software License', async (t) => {
   t.assert(hasLicense === false);
 });
 
-test('Check for a address if it has Valist Software License', async (t) => {
+test('Check for a address if it has Valist Software License without signer', async (t) => {
   const provider = new ethers.providers.JsonRpcProvider(
     'https://rpc.ankr.com/polygon_mumbai'
   );
@@ -35,6 +35,15 @@ test('Check for a address if it has Valist Software License', async (t) => {
     PRODUCT_ID
   );
   t.assert(hasLicense);
+});
+
+test('Check for a address if it has Valist Software License with signer', async (t) => {
+  const { wallet } = await createRandomWallet();
+  const client = await create(wallet as Signer, {
+    chainId: 80001,
+  });
+  const { hasLicense } = await client.checkLicense(PRODUCT_ID);
+  t.assert(hasLicense === false);
 });
 
 test('Wallet has insufficient balance', async (t) => {

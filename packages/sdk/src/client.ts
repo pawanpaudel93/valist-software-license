@@ -1,5 +1,6 @@
+import { randomStringForEntropy } from '@stablelib/random';
 import { BigNumber, BigNumberish, Contract, ContractTransaction } from 'ethers';
-import { arrayify, hashMessage, recoverAddress } from 'ethers/lib/utils';
+import { verifyMessage } from 'ethers/lib/utils';
 
 import { erc20ABI, multiCallABI, multiCallContractAddress } from './contracts';
 
@@ -102,21 +103,31 @@ export default class LicenseClient {
    *
    * @param {BigNumberish} projectID - Valist Project ID
    * @param {string} signingMessage - Message to sign with the wallet
-   * @returns {Promise<{hasLicense: boolean, signature: string}>} Object containing boolean hasLicense and signature of signed message
+   * @throws {Error} if the recovered address is not the singer address
+   * @returns {Promise<{hasLicense: boolean, signingMessage: string, signature: string, nonce: undefined | string}>} Object containing boolean hasLicense, signingMessage, nonce and signature of signed message
    */
-  async checkLicense(
-    projectID: BigNumberish,
-    signingMessage = 'Authenticate your wallet'
-  ) {
+  async checkLicense(projectID: BigNumberish, signingMessage?: string) {
     // check if signer is present
     if (!this.license.signer) {
       throw Error('Sending a transaction requires a signer');
     }
+    let nonce: undefined | string;
+    const signerAddress = await this.license.signer.getAddress();
+    if (!signingMessage) {
+      nonce = this.generateNonce();
+      signingMessage = `
+      Message:
+      
+      Authenticate your wallet with address: ${signerAddress}
+
+      Nonce: ${nonce}
+      `;
+    }
     const signature = await this.license.signer.signMessage(signingMessage);
-    const digest = arrayify(hashMessage(signingMessage));
-    const recoveredAddress = recoverAddress(digest, signature);
+    const recoveredAddress = verifyMessage(signingMessage, signature);
+    if (recoveredAddress !== signerAddress) throw Error('Invalid Signature');
     const hasLicense = await this.hasLicense(recoveredAddress, projectID);
-    return { hasLicense, signature };
+    return { hasLicense, signingMessage, signature, nonce };
   }
 
   /**
@@ -129,6 +140,25 @@ export default class LicenseClient {
   async hasLicense(address: string, projectID: BigNumberish): Promise<boolean> {
     const balance = await this.license.balanceOf(address, projectID);
     return balance.gt(0);
+  }
+
+  /**
+   * This method leverages a native CSPRNG with support for both browser and Node.js
+   * environments in order generate a cryptographically secure nonce for use in the
+   * SiweMessage in order to prevent replay attacks.
+   *
+   * 96 bits has been chosen as a number to sufficiently balance size and security considerations
+   * relative to the lifespan of it's usage.
+   *
+   * @returns cryptographically generated random nonce with 96 bits of entropy encoded with
+   * an alphanumeric character set.
+   */
+  generateNonce(): string {
+    const nonce = randomStringForEntropy(96);
+    if (!nonce || nonce.length < 8) {
+      throw new Error('Error during nonce creation.');
+    }
+    return nonce;
   }
 
   /**

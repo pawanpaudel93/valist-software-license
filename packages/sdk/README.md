@@ -106,8 +106,17 @@ await tx.wait();
 ```typescript
 // Valist Product ID
 const productId = "0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc2e905";
+const address = "0xFf57433E786C00e0df38bA17a9724EC78C3F6f5B":
+const nonce = client.generateNonce()
+// This is the default signing message if custom signing message is not provided
+const signingMessage = `
+  Message:
+  
+  Authenticate your wallet with address: ${address}
 
-const { hasLicense, signature } = await client.checkLicense(productId, "Authenticate using wallet");
+  Nonce: ${nonce}
+`;
+const { hasLicense } = await client.checkLicense(productId, signingMessage);
 console.log(hasLicense); // True or False
 ```
 
