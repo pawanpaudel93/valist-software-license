@@ -5,7 +5,7 @@
 # Valist Software License lightweight SDK
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.6-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.7-blue.svg?cacheSeconds=2592000" />
 </p>
 
 ## About
@@ -109,13 +109,7 @@ const productId = "0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc
 const address = "0xFf57433E786C00e0df38bA17a9724EC78C3F6f5B":
 const nonce = client.generateNonce()
 // This is the default signing message if custom signing message is not provided
-const signingMessage = `
-  Message:
-  
-  Authenticate your wallet with address: ${address}
-
-  Nonce: ${nonce}
-`;
+const signingMessage = `Authenticate your wallet with address: ${address}\nNonce: ${nonce}`;
 const { hasLicense } = await client.checkLicense(productId, signingMessage);
 console.log(hasLicense); // True or False
 ```

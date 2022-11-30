@@ -115,13 +115,10 @@ export default class LicenseClient {
     const signerAddress = await this.license.signer.getAddress();
     if (!signingMessage) {
       nonce = this.generateNonce();
-      signingMessage = `
-      Message:
-      
-      Authenticate your wallet with address: ${signerAddress}
-
-      Nonce: ${nonce}
-      `;
+      signingMessage = [
+        `Authenticate your wallet with address: ${signerAddress}`,
+        `Nonce: ${nonce}`,
+      ].join('\n');
     }
     const signature = await this.license.signer.signMessage(signingMessage);
     const recoveredAddress = verifyMessage(signingMessage, signature);

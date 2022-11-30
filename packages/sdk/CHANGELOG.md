@@ -26,3 +26,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### 0.0.6 (2022-11-30)
 
 - Added random nonce to default signing message in checkLicense method of LicenseClient
+
+### 0.0.7 (2022-11-30)
+
+- Fixed default signing message in checkLicense method of LicenseClient
