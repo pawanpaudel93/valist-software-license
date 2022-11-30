@@ -18,5 +18,8 @@
   },
   "workspaces": {
     "packages":["packages/*"]
+  },
+  "resolutions": {
+    "license-gated-dapp/valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.7.tgz"
   }
 }

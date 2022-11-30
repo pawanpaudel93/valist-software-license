@@ -5443,7 +5443,7 @@ valid-url@^1.0.9:
 
 "valist-software-license@https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.7.tgz":
   version "0.0.7"
-  resolved "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.7.tgz#1db944d1b96ff83b1e4fe4fe828331d0b4208ac0"
+  resolved "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.7.tgz#ca83f0213bafb4947f1e2bcde3035df997596077"
   dependencies:
     ethers "^5.7.2"
 
