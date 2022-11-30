@@ -1,5 +1,5 @@
 {
-  "name": "valist-software-license",
+  "name": "valist-software-license-sdk",
   "version": "0.0.1",
   "description": "Valist software license NFT",
   "main": "index.js",
@@ -17,9 +17,8 @@
     "doc:publish": "yarn workspace valist-software-license doc:publish"
   },
   "workspaces": {
-    "packages":["packages/*"]
-  },
-  "resolutions": {
-    "license-gated-dapp/valist-software-license": "https://registry.npmjs.org/valist-software-license/-/valist-software-license-0.0.7.tgz"
+    "packages": [
+      "packages/*"
+    ]
   }
 }
