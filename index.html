@@ -71,7 +71,7 @@
 					<h1>Valist Software License lightweight SDK</h1>
 				</a>
 				<p>
-					<img alt="Version" src="https://img.shields.io/badge/version-0.0.5-blue.svg?cacheSeconds=2592000" />
+					<img alt="Version" src="https://img.shields.io/badge/version-0.0.6-blue.svg?cacheSeconds=2592000" />
 				</p>
 				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
 					<h2>About</h2>
@@ -161,8 +161,17 @@
 				</a>
 				<pre><code class="language-typescript"><span class="hljs-comment">// Valist Product ID</span>
 <span class="hljs-keyword">const</span> productId = <span class="hljs-string">&quot;0x62540d928401ecc8386fe86066a1d1f580e60737f0d87444ba7558786dc2e905&quot;</span>;
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;0xFf57433E786C00e0df38bA17a9724EC78C3F6f5B&quot;</span>:
+<span class="hljs-keyword">const</span> nonce = client.generateNonce()
+<span class="hljs-comment">// This is the default signing message if custom signing message is not provided</span>
+<span class="hljs-keyword">const</span> signingMessage = <span class="hljs-string">`
+  Message:
+  
+  Authenticate your wallet with address: <span class="hljs-subst">${address}</span>
 
-<span class="hljs-keyword">const</span> { hasLicense, signature } = <span class="hljs-keyword">await</span> client.checkLicense(productId, <span class="hljs-string">&quot;Authenticate using wallet&quot;</span>);
+  Nonce: <span class="hljs-subst">${nonce}</span>
+`</span>;
+<span class="hljs-keyword">const</span> { hasLicense } = <span class="hljs-keyword">await</span> client.checkLicense(productId, signingMessage);
 <span class="hljs-built_in">console</span>.log(hasLicense); <span class="hljs-comment">// True or False</span>
 </code></pre>
 				<a href="#check-license-of-address" id="check-license-of-address" style="color: inherit; text-decoration: none;">
